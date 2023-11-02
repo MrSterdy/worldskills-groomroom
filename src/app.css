@@ -1,0 +1,13 @@
+@font-face {
+    font-family: Merriweather;
+    src: url("$lib/fonts/Merriweather-Regular.ttf");
+}
+
+@font-face {
+    font-family: OpenSans;
+    src: url("$lib/fonts/OpenSans-Regular.ttf");
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utils;
