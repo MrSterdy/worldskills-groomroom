@@ -10,4 +10,21 @@
 
 @tailwind base;
 @tailwind components;
-@tailwind utils;
+@tailwind utilities;
+
+@layer base {
+    html {
+        @apply h-full;
+    }
+
+    body {
+        @apply min-h-full;
+    }
+
+    h1 {
+        @apply font-bold font-merriweather text-2xl;
+    }
+    h2 {
+        @apply font-bold font-merriweather text-xl;
+    }
+}
