@@ -7,8 +7,6 @@
         <img class="h-20" src={logo2} alt="logo" />
     </a>
     <div>
-        <a href="/" class="duration-150 hover:text-secondary">
-            Кабинет
-        </a>
+        <a href="/">Кабинет</a>
     </div>
 </nav>

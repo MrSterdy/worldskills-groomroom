@@ -23,13 +23,19 @@ export async function getUserByUsername(username: string): Promise<User | null> 
     return entity ? mapUserEntityToUser(entity) : null;
 }
 
+export async function getUserByEmail(email: string): Promise<User | null> {
+    const entity = await db.user.findFirst({ where: { email } });
+
+    return entity ? mapUserEntityToUser(entity) : null;
+}
+
 export async function getUserEntityByUsername(username: string) {
     const entity = await db.user.findFirst({ where: { username } });
 
     return entity ?? null;
 }
 
-export async function createUser(user: Omit<User, "id">, password: string) {
+export async function createUser(user: User, password: string) {
     const passwordHash = await bcrypt.hash(password, 10);
 
     await db.user.create({

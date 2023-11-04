@@ -4,10 +4,16 @@
 
     export let data: PageData;
 
-    const { form, enhance, message, constraints, submitting } = superForm(data.form);
+    const { form, enhance, message, constraints, submitting } = superForm(
+        data.form
+    );
 </script>
 
-<form class="flex flex-col items-center gap-4 max-w-lg mx-auto p-4" method="POST" use:enhance>
+<form
+    class="flex flex-col items-center gap-4 max-w-lg mx-auto p-4"
+    method="POST"
+    use:enhance
+>
     <h1 class="text-center">Вход</h1>
 
     <div class="bg-base-200 card p-4 w-full card-body card-compact">
@@ -25,7 +31,7 @@
         <div>
             <span class="label label-text">Пароль</span>
             <input
-                type="text"
+                type="password"
                 placeholder="Пароль"
                 name="password"
                 class="input input-secondary input-bordered w-full"
@@ -42,5 +48,10 @@
             {/if}
             Войти
         </button>
+        <span class="text-center"
+            >Нет аккаунта? <a href="/auth/register" class="underline"
+                >Зарегистрироваться</a
+            ></span
+        >
     </div>
 </form>

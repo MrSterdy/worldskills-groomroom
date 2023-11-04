@@ -27,4 +27,8 @@
     h2 {
         @apply font-bold font-merriweather text-xl;
     }
+
+    a {
+        @apply duration-150 hover:text-secondary;
+    }
 }
