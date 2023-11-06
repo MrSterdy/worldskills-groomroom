@@ -18,5 +18,32 @@ model User {
 
   passwordHash String @db.Text
 
+  orders Order[]
+
   @@index([email])
+}
+
+model Order {
+  id Int @id @default(autoincrement())
+
+  user     User   @relation(fields: [username], references: [username], onDelete: Cascade)
+  username String
+
+  petName  String
+  petPhoto OrderImage?
+
+  status OrderStatus @default(NEW)
+}
+
+model OrderImage {
+  order   Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId Int   @unique
+
+  data String @db.Text
+}
+
+enum OrderStatus {
+  FINISHED
+  PROCESSING
+  NEW
 }

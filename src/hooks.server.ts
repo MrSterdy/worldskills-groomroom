@@ -50,7 +50,7 @@ export const handle: Handle = async ({ event, resolve }) => {
         }
 
         if (event.url.pathname.startsWith("/auth")) {
-            throw redirect(303, "/dashboard");
+            throw redirect(303, "/dashboard/orders");
         }
     } else if (event.url.pathname.startsWith("/dashboard")) {
         throw redirect(303, "/auth/login");

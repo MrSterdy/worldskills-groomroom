@@ -37,7 +37,7 @@ export const actions: Actions = {
         if (await comparePasswords(form.data.password, user.passwordHash)) {
             await login(event, mapUserEntityToUser(user));
 
-            throw redirect(303, "/dashboard");
+            throw redirect(303, "/dashboard/orders");
         }
 
         return message(form, "Неверный логин или пароль");

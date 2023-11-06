@@ -27,8 +27,17 @@
     h2 {
         @apply font-bold font-merriweather text-xl;
     }
+    h3 {
+        @apply font-bold font-merriweather text-lg;
+    }
 
     a {
         @apply duration-150 hover:text-secondary;
+    }
+}
+
+@layer utilities {
+    .word-break {
+        word-break: break-word;
     }
 }

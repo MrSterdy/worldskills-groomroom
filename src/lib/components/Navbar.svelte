@@ -38,7 +38,7 @@
         <div class="drawer-side">
             <label for="header" aria-label="close sidebar" class="drawer-overlay"></label>
             <div class="menu p-4 gap-2 max-w-[50%] w-80 min-h-full bg-base-200">
-                <div class="self-center break-words grid place-items-center gap-2">
+                <div class="self-center word-break grid place-items-center gap-2">
                     <img src={profile} alt="profile" class="h-16" />
 
                     <h2 class="text-center">
@@ -58,7 +58,7 @@
             <img class="h-20" src={logo2} alt="logo" />
         </a>
         <div>
-            <a href="/dashboard">Кабинет</a>
+            <a href="/dashboard/orders">Кабинет</a>
         </div>
     </nav>
 {/if}
