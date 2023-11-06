@@ -54,7 +54,7 @@ export const handle: Handle = async ({ event, resolve }) => {
             await login(event, user);
         }
 
-        if (path.startsWith("/auth")) {
+        if (path.startsWith("/auth/login") || path.startsWith("/auth/register")) {
             throw redirect(303, "/dashboard/orders");
         }
 
