@@ -12,6 +12,9 @@ export async function getUserOrders(
         prisma.order.findMany({
             take: pageSize,
             skip: Math.abs(page - 1) * pageSize,
+            orderBy: {
+                creationDate: "asc"
+            },
             where: {
                 username
             }
@@ -21,6 +24,8 @@ export async function getUserOrders(
     return {
         items: orders.map(order => ({
             id: order.id,
+            user: order.username,
+            creationDate: order.creationDate.toISOString(),
             petName: order.petName,
             petPhoto: orderIdToImageUrl(order.id),
             status: order.status
@@ -30,9 +35,28 @@ export async function getUserOrders(
     };
 }
 
+export async function getOrderById(orderId: number): Promise<Order | null> {
+    const result = await prisma.order.findFirst({ where: { id: orderId } });
+
+    return result
+        ? {
+              id: result.id,
+              user: result.username,
+              creationDate: result.creationDate.toISOString(),
+              petName: result.petName,
+              petPhoto: orderIdToImageUrl(result.id),
+              status: result.status
+          }
+        : null;
+}
+
+export async function deleteOrder(orderId: number) {
+    await prisma.order.delete({ where: { id: orderId } });
+}
+
 export async function createOrder(
     username: string,
-    order: Omit<Order, "id" | "status">
+    order: Omit<Order, "id" | "creationDate" | "status">
 ) {
     await prisma.order.create({
         data: {

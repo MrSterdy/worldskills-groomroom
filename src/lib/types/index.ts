@@ -13,6 +13,10 @@ export type User = {
 export type Order = {
     id: number;
 
+    creationDate: string;
+
+    user: string;
+
     petName: string;
     petPhoto: string;
 

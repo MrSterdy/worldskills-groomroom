@@ -26,6 +26,8 @@ model User {
 model Order {
   id Int @id @default(autoincrement())
 
+  creationDate DateTime @default(now())
+
   user     User   @relation(fields: [username], references: [username], onDelete: Cascade)
   username String
 
