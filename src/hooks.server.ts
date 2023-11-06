@@ -9,7 +9,13 @@ export const handle: Handle = async ({ event, resolve }) => {
     const accessToken = event.cookies.get(ACCESS_TOKEN_COOKIE);
     const refreshToken = event.cookies.get(REFRESH_TOKEN_COOKIE);
 
+    const path = event.url.pathname;
+
     if (!accessToken && !refreshToken) {
+        if (path.startsWith("/dashboard")) {
+            throw redirect(303, "/auth/login");
+        }
+
         return resolve(event);
     }
 
@@ -44,8 +50,10 @@ export const handle: Handle = async ({ event, resolve }) => {
         }
 
         if (event.url.pathname.startsWith("/auth")) {
-            throw redirect(303, "/");
+            throw redirect(303, "/dashboard");
         }
+    } else if (event.url.pathname.startsWith("/dashboard")) {
+        throw redirect(303, "/auth/login");
     }
 
     return resolve(event);
