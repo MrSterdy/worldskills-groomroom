@@ -18,6 +18,8 @@ model User {
 
   passwordHash String @db.Text
 
+  isAdmin Boolean @default(false)
+
   orders Order[]
 
   @@index([email])
@@ -31,13 +33,21 @@ model Order {
   user     User   @relation(fields: [username], references: [username], onDelete: Cascade)
   username String
 
-  petName  String
-  petPhoto OrderImage?
+  petName           String
+  petPhoto          OrderImage?
+  processedPetPhoto ProcessedOrderImage?
 
   status OrderStatus @default(NEW)
 }
 
 model OrderImage {
+  order   Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId Int   @unique
+
+  data String @db.Text
+}
+
+model ProcessedOrderImage {
   order   Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
   orderId Int   @unique
 

@@ -29,13 +29,15 @@
                 </div>
                 <div class="flex-none hidden md:block">
                     <ul class="menu menu-horizontal gap-2">
-                        <li><a href="/">Заказы</a></li>
-                        <li><a href="/">Настройки</a></li>
+                        <li><a href="/dashboard/orders">Заказы</a></li>
+                        {#if user?.isAdmin}
+                            <li><a href="/dashboard/orders/manage">Управление</a></li>
+                        {/if}
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="drawer-side">
+        <div class="drawer-side z-10">
             <label for="header" aria-label="close sidebar" class="drawer-overlay"></label>
             <div class="menu p-4 gap-2 max-w-[50%] w-80 min-h-full bg-base-200">
                 <div class="self-center word-break grid place-items-center gap-2">
@@ -46,8 +48,10 @@
                     </h2>
                 </div>
                 <ul>
-                    <li><a href="/">Заказы</a></li>
-                    <li><a href="/">Настройки</a></li>
+                    <li><a href="/dashboard/orders">Заказы</a></li>
+                    {#if user?.isAdmin}
+                        <li><a href="/dashboard/orders/manage">Управление</a></li>
+                    {/if}
                 </ul>
             </div>
         </div>

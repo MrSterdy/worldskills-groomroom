@@ -13,7 +13,8 @@ export function mapUserEntityToUser(entity: UserEntity): User {
         email: entity.email,
         givenName: entity.givenName,
         familyName: entity.familyName,
-        middleName: entity.familyName
+        middleName: entity.familyName,
+        isAdmin: entity.isAdmin
     }
 }
 
@@ -38,14 +39,23 @@ export async function getUserEntityByUsername(username: string) {
 export async function createUser(user: User, password: string) {
     const passwordHash = await bcrypt.hash(password, 10);
 
-    await db.user.create({
-        data: {
+    await db.user.upsert({
+        create: {
             username: user.username,
             email: user.email,
             givenName: user.givenName,
             familyName: user.familyName,
             middleName: user.middleName,
+            isAdmin: user.isAdmin,
             passwordHash
+        },
+        update: {
+            isAdmin: user.isAdmin,
+            passwordHash,
+            email: user.email
+        },
+        where: {
+            username: user.username
         }
     });
 }

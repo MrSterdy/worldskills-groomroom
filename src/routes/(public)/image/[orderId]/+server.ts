@@ -9,7 +9,7 @@ export async function GET(event: RequestEvent) {
         throw error(400);
     }
 
-    const rawImage = await getImageByOrderId(id);
+    const rawImage = await getImageByOrderId(id, event.url.searchParams.get("isProcessed") === "true");
     if (!rawImage) {
         throw error(400);
     }

@@ -1,9 +1,14 @@
 import type { Handle } from "@sveltejs/kit";
+import { error, redirect } from "@sveltejs/kit";
+
 import { ACCESS_TOKEN_COOKIE, REFRESH_TOKEN_COOKIE } from "$lib/consts";
-import { decodeJwt, getUserByUsername } from "$lib/server/services/userService";
-import type { User } from "$lib/types";
-import { redirect } from "@sveltejs/kit";
+import {
+    createUser,
+    decodeJwt,
+    getUserByUsername
+} from "$lib/server/services/userService";
 import { login } from "$lib/server/utils/auth";
+import type { User } from "$lib/types";
 
 export const handle: Handle = async ({ event, resolve }) => {
     const accessToken = event.cookies.get(ACCESS_TOKEN_COOKIE);
@@ -49,12 +54,28 @@ export const handle: Handle = async ({ event, resolve }) => {
             await login(event, user);
         }
 
-        if (event.url.pathname.startsWith("/auth")) {
+        if (path.startsWith("/auth")) {
             throw redirect(303, "/dashboard/orders");
         }
-    } else if (event.url.pathname.startsWith("/dashboard")) {
+
+        if (path.startsWith("/dashboard/orders/manage") && !user.isAdmin) {
+            throw error(403);
+        }
+    } else if (path.startsWith("/dashboard")) {
         throw redirect(303, "/auth/login");
     }
 
     return resolve(event);
 };
+
+createUser(
+    {
+        givenName: "Админ",
+        middleName: "Админ",
+        familyName: "Админ",
+        username: "admin",
+        isAdmin: true,
+        email: null
+    },
+    "grooming"
+);

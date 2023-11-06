@@ -1,5 +1,5 @@
-export function orderIdToImageUrl(orderId: number) {
-    return `/image/${orderId}`;
+export function orderIdToImageUrl(orderId: number, isProcessed: boolean) {
+    return `/image/${orderId}?isProcessed=${isProcessed}`;
 }
 
 export function bytesToMegabytes(bytes: number) {

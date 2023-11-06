@@ -14,17 +14,25 @@
         <ul class="flex flex-col gap-4">
             {#each data.orders.items as item}
                 <li
-                    class="card card-body card-compact bg-base-200 flex-row p-4 gap-4 w-full"
+                    class="card card-body card-compact bg-base-200 p-4 gap-4 w-full"
                 >
-                    <img
-                        src={item.petPhoto}
-                        alt="fotka"
-                        class="h-24 w-auto rounded-box"
-                    />
+                    {#if item.status === "FINISHED"}
+                        <img
+                            src={item.processedPetPhoto}
+                            alt="fotka"
+                            class="w-full rounded-box"
+                        />
+                    {/if}
+                    <div class="flex gap-4 w-full">
+                        <img
+                            src={item.petPhoto}
+                            alt="fotka"
+                            class="h-24 w-auto rounded-box"
+                        />
 
-                    <div class="flex flex-col gap-2 grow">
-                        <h3 class="word-break">{item.petName}</h3>
-                        <div class="flex flex-col gap-2">
+                        <div class="flex flex-col gap-2 grow">
+                            <h3 class="word-break">{item.petName}</h3>
+                            <div class="flex flex-col gap-2">
                             <span
                                 class="badge"
                                 class:badge-info={item.status === "NEW"}
@@ -34,11 +42,12 @@
                             >
                                 {orderStatuses[item.status]}
                             </span>
-                            <span
+                                <span
                                 >{new Date(
                                     item.creationDate
                                 ).toLocaleString()}</span
-                            >
+                                >
+                            </div>
                         </div>
                     </div>
 

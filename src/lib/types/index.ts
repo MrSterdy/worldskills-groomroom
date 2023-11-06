@@ -8,6 +8,8 @@ export type User = {
     givenName: string;
     familyName: string;
     middleName: string;
+
+    isAdmin: boolean;
 };
 
 export type Order = {
@@ -19,6 +21,7 @@ export type Order = {
 
     petName: string;
     petPhoto: string;
+    processedPetPhoto: string | null;
 
     status: keyof typeof orderStatuses;
 };

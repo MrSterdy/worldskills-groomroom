@@ -48,12 +48,11 @@ export const actions: Actions = {
             );
         }
 
-        const order: Omit<Order, "id" | "status"> = {
+        const order: Omit<Order, "id" | "creationDate" | "status" | "user"> = {
             petName: form.data.petName,
-            petPhoto: await bufferToDataUrl(petImage.type, Buffer.from(await petImage.arrayBuffer()))
+            petPhoto: await bufferToDataUrl(petImage.type, Buffer.from(await petImage.arrayBuffer())),
+            processedPetPhoto: null
         };
-
-        console.log(event.locals.user);
 
         await createOrder(event.locals.user!.username, order);
 
