@@ -1,0 +1,12 @@
+{
+  "name": "GroomRoom",
+  "short_name": "GroomRoom",
+  "description": "Лучший уход за внешним видом вашего питомца",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ]
+}
