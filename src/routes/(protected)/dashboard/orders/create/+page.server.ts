@@ -1,6 +1,5 @@
 import { error, fail, redirect } from "@sveltejs/kit";
 import { message, superValidate } from "sveltekit-superforms/server";
-import bufferToDataUrl from "buffer-to-data-url"
 import { z } from "zod";
 
 import type { Actions, PageServerLoad } from "./$types";
@@ -9,6 +8,7 @@ import { allowedImageTypes, maxFileSize } from "$lib/consts";
 import { createOrder } from "$lib/server/services/orderService";
 import type { Order } from "$lib/types";
 import { bytesToMegabytes } from "$lib/utils";
+import { fileToDataUri } from "$lib/server/utils/file";
 
 const orderForm = z.object({
     petName: z.string().max(64)
@@ -50,7 +50,7 @@ export const actions: Actions = {
 
         const order: Omit<Order, "id" | "creationDate" | "status" | "user"> = {
             petName: form.data.petName,
-            petPhoto: await bufferToDataUrl(petImage.type, Buffer.from(await petImage.arrayBuffer())),
+            petPhoto: await fileToDataUri(petImage),
             processedPetPhoto: null
         };
 

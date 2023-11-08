@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import { JWT_SECRET } from "$env/static/private";
+import { env } from "$env/dynamic/private";
 
 import db from "$lib/server/db";
 import type { User } from "$lib/types";
@@ -65,10 +65,10 @@ export function comparePasswords(password: string, passwordHash: string) {
 }
 
 export function generateJwt(user: User) {
-    const accessToken = jwt.sign({ user: JSON.stringify(user) }, JWT_SECRET, {
+    const accessToken = jwt.sign({ user: JSON.stringify(user) }, env.JWT_SECRET!, {
         expiresIn: "1d"
     });
-    const refreshToken = jwt.sign({ username: user.username }, JWT_SECRET, {
+    const refreshToken = jwt.sign({ username: user.username }, env.JWT_SECRET!, {
         expiresIn: "7d"
     });
 
@@ -77,7 +77,7 @@ export function generateJwt(user: User) {
 
 export function decodeJwt(token: string): User | string | null {
     try {
-        const result = jwt.verify(token, JWT_SECRET) as
+        const result = jwt.verify(token, env.JWT_SECRET!) as
             | { user: string }
             | { username: string };
         return "user" in result

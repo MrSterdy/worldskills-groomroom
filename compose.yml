@@ -1,0 +1,37 @@
+networks:
+  back-end:
+    driver: bridge
+
+services:
+  web:
+    build:
+      context: ./
+      args:
+        DATABASE_URL: postgresql://postgres:postgres@db:5432/postgres?schema=public
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/postgres?schema=public
+      JWT_SECRET: 123321
+      ORIGIN: http://localhost:3000
+      BODY_SIZE_LIMIT: 0
+    restart: always
+    command: /bin/sh -c "npx prisma migrate deploy && node index.js"
+    depends_on:
+      - db
+    networks:
+      - back-end
+    ports:
+      - "3000:3000"
+
+  db:
+    image: postgres:16.0-alpine3.18
+    restart: always
+    networks:
+      - back-end
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    volumes:
+      - groomroom-db-data:/var/lib/postgresql/data
+
+volumes:
+  groomroom-db-data:

@@ -1,10 +1,10 @@
 import { error, redirect } from "@sveltejs/kit";
-import bufferToDataUrl from "buffer-to-data-url";
 
 import type { Actions, PageServerLoad } from "./$types";
 
 import { allowedImageTypes } from "$lib/consts";
 import { getOrderById, updateOrder } from "$lib/server/services/orderService";
+import { fileToDataUri } from "$lib/server/utils/file";
 
 export const load: PageServerLoad = async event => {
     const order = await getOrderById(parseInt(event.params.orderId) || -1);
@@ -35,10 +35,7 @@ export const actions: Actions = {
             ) {
                 throw error(400);
             }
-            order.processedPetPhoto = await bufferToDataUrl(
-                petImage.type,
-                Buffer.from(await petImage.arrayBuffer())
-            );
+            order.processedPetPhoto = await fileToDataUri(petImage);
             order.status = "FINISHED";
             doRedirect = true;
         }

@@ -6,7 +6,7 @@
         "dev": "vite dev",
         "build": "vite build",
         "preview": "vite preview",
-        "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+        "check": "prisma generate && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
         "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
         "lint": "prettier --write . && eslint . --fix"
     },
@@ -41,7 +41,6 @@
     "dependencies": {
         "@prisma/client": "^5.5.2",
         "bcrypt": "^5.1.1",
-        "buffer-to-data-url": "^1.0.0",
         "jsonwebtoken": "^9.0.2",
         "sveltekit-superforms": "^1.9.0",
         "zod": "^3.22.4"

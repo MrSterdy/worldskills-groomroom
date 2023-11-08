@@ -48,7 +48,8 @@ export const actions: Actions = {
             email: form.data.email,
             givenName: form.data.givenName,
             familyName: form.data.familyName,
-            middleName: form.data.middleName
+            middleName: form.data.middleName,
+            isAdmin: false
         };
 
         await createUser(user, form.data.password);

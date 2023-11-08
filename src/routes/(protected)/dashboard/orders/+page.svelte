@@ -2,9 +2,11 @@
     import type { PageData } from "./$types";
     import { orderStatuses } from "$lib/consts";
     import Paginate from "$lib/components/Paginate.svelte";
-    import { enhance } from "$app/forms";
+    import { superForm } from "sveltekit-superforms/client";
 
     export let data: PageData;
+
+    const { enhance } = superForm(data.form);
 </script>
 
 <article class="flex flex-col mx-auto gap-2 max-w-xl p-4">
