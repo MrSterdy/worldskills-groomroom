@@ -10,6 +10,10 @@
     );
 </script>
 
+<svelte:head>
+    <title>Создание заказа</title>
+</svelte:head>
+
 <form
     method="POST"
     use:enhance

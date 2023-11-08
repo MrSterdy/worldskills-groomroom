@@ -11,6 +11,10 @@
     import paws2 from "$lib/images/gallery/paws2.jpg";
 </script>
 
+<svelte:head>
+    <title>GroomRoom</title>
+</svelte:head>
+
 <article class="space-y-8">
     <div class="grid place-items-center text-center gap-4 mx-auto max-w-[42rem]">
         <img class="w-56 h-52" src={logo} alt="GroomRoom" />

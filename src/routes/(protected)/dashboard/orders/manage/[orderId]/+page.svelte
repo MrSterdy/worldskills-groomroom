@@ -6,6 +6,10 @@
     export let data: PageData;
 </script>
 
+<svelte:head>
+    <title>Управление заказом</title>
+</svelte:head>
+
 <form
     class="flex flex-col items-center gap-4 max-w-lg mx-auto p-4"
     method="POST"

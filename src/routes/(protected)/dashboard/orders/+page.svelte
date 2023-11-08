@@ -9,6 +9,10 @@
     const { enhance } = superForm(data.form);
 </script>
 
+<svelte:head>
+    <title>Заказы</title>
+</svelte:head>
+
 <article class="flex flex-col mx-auto gap-2 max-w-xl p-4">
     <h1 class="text-center">Ваши заказы</h1>
 
